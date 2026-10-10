@@ -1,0 +1,54 @@
+# protocol-core-dist — envoltura de DISTRIBUCIÓN del núcleo `protocol-core`
+# v0.1.0 (Camino P-1, acta del 9-Oct-2026). Este repositorio NO re-sella nada:
+# copia el núcleo congelado byte a byte y le añade el ejecutable `protocol-audit`.
+#
+# Reparto declarado:
+#   · `~/protocol-core`  -> la materia sellada. No se toca (cero escrituras).
+#   · `~/protocol-core-dist` -> ESTE repositorio. Metadatos de distribución,
+#     el ejecutable y la puerta que vigila la deriva de la copia.
+#
+# La deriva de la copia es el coste declarado del Camino P-1 (dos copias del
+# mismo código). No se cierra con disciplina: se cierra con la puerta
+# `tests/test_vendor.py`, que fija el sha256 de cada pieza heredada.
+#
+# Agnosticismo estricto (§0.4) aplicado al empaquetado, igual que en el núcleo:
+#   · CERO dependencias de ejecución      -> `dependencies = []`
+#   · CERO dependencias locales           -> nada de `../`, nada del núcleo por ruta
+#   · CERO rutas absolutas                -> el paquete se busca SÓLO bajo `src/`
+#   · CERO directorios ajenos             -> `where = ["src"]` y `include = ["protocol_audit*"]`
+#
+# Campo `license`: NO se declara aquí. La licencia (AGPL-3.0) viaja como
+# archivo (`LICENSE`, `LICENSE_SPEC_CC-BY-4.0.txt`, cabecera de `SPEC.md`), y
+# elegir la expresión SPDX que la resume es un acto del dueño del sello, no de
+# la envoltura. Se declara la ausencia, no se improvisa el campo.
+#
+# Motor de pruebas — UNO SOLO, y es el de la biblioteca estándar: `unittest`.
+#
+#     python3 -B -m unittest discover -s protocol-core-dist/tests -v
+#
+# Dos motores para la misma suite miden dos veces el mismo objeto: una salida
+# que no puede diferir no es evidencia.
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "protocol-core-dist"
+version = "0.1.0"
+description = "Ejecutable `protocol-audit`: audita un arbol contra su manifiesto sellado, sobre el nucleo protocol-core v0.1.0"
+readme = "README.md"
+# Piso declarado, NO medido (mismo piso que el nucleo): el arbol del nucleo se
+# corre con el interprete del sistema. El piso es de empaquetado, no del objeto.
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+protocol-audit = "protocol_audit.__main__:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["protocol_audit*"]
