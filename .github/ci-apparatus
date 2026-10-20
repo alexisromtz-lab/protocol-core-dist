@@ -1,6 +1,6 @@
 # HUELLA-CI-PYTHON-V5-PROHIBICION-EVAL-20261020
-# Contrato v5: comando: + mide: (+ evidencia: si mide es manifiesto o banco).
-# La plantilla de este repo ya no firma verde con un comando que no mide.
+# HUELLA-CI-PYTHON-V5-ERRATA-2-ALIAS-PYTEST-20261020
 # Aparato declarado: pytest (2 archivos — tests/test_cli.py, tests/test_vendor.py).
-comando: pytest
+# `python -m pytest`, no `pytest`: v5 no reescribe el comando declarado.
+comando: python -m pytest -q
 mide: tests
