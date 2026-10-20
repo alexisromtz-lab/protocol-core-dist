@@ -1,3 +1,6 @@
-# HUELLA-APPARATUS-protocol-core-dist-20261020
+# HUELLA-CI-PYTHON-V5-PROHIBICION-EVAL-20261020
+# Contrato v5: comando: + mide: (+ evidencia: si mide es manifiesto o banco).
+# La plantilla de este repo ya no firma verde con un comando que no mide.
 # Aparato declarado: pytest (2 archivos — tests/test_cli.py, tests/test_vendor.py).
-pytest
+comando: pytest
+mide: tests
