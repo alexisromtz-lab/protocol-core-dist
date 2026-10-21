@@ -43,6 +43,11 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = []
 
+[project.optional-dependencies]
+# pytest es dependencia de DESARROLLO: el aparato la invoca, el runtime no.
+# Declararla (y no que el runner la regale) es lo que exige la ley v10.
+dev = ["pytest>=8,<10"]
+
 [project.scripts]
 protocol-audit = "protocol_audit.__main__:main"
 
